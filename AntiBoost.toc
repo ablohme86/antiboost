@@ -1,0 +1,6 @@
+## Interface: 11401
+## Title: AntiBoost
+## Notes: Automatically detect boost sellers and ignore them for life!
+## Author: Alexander Blohme
+## Version: 1.1
+AntiBoost.lua
