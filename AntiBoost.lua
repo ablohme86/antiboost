@@ -177,12 +177,12 @@ end
 -- Funksjon for å lage en klikkbar melding
 local function CreateClickableMessage(author, message)
     -- Lag en klikkbar melding som bruker chatlink-systemet
-    local chatMessage = string.format(
-        "|cff00ff00Booster has been detected!|r |Hshowmessage:%s:%s|h[More Information|h]",
-        author, message
-    )
-    ChatFrame1:AddMessage(chatMessage, 1.0, 1.0, 0.0)
-
+local chatMessage = string.format(
+    "|cff00ff00Booster has been detected!|r |Hshowmessage:%s:%s|h[More Information]|h",
+    
+    author, message
+)
+ChatFrame1:AddMessage(chatMessage, 1.0, 1.0, 0.0)
 end
 
 -- Event frame for å fange opp meldinger
@@ -212,15 +212,17 @@ end)
 
 
 
-local function HandleHyperlinkClick(link, text, button)
-    -- Din egen logikk her
-    print("Link clicked:", link, text, button)
+-- Definer en funksjon som skal håndtere eventet
+local function OnHyperlinkClick(self, link, text, button)
+    print("we clicked a hl")
+    local linkType, author, message = strsplit(":", link)
+    if linkType == "showmessage" then
+        print("Author: " .. author)
+        print("Message: " .. message)
+        -- Gjør noe med informasjonen, f.eks. vis en ny dialogboks eller meldingsboks
+    end
 end
 
+-- Registrer event handler for HyperlinkClick
+ChatFrame1:HookScript("OnHyperlinkClick", OnHyperlinkClick)
 
--- Bruk eksisterende chatlink-håndterer funksjon
-hooksecurefunc("ChatFrame_OnHyperlinkClick", function(frame, link, text, button)
-    if link:find("showmessage") then
-        HandleHyperlinkClick(link, text, button)
-    end
-end)
